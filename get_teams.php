@@ -1,32 +1,41 @@
 <?php
-// get_teams.php
-
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "woldcup_db";
+$dbname = "worldcup";
 
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+// Check if group_id is set in the URL
+if (isset($_GET['group_id'])) {
+    $groupId = $_GET['group_id'];
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-if (isset($_GET['groupId'])) {
-    $groupId = $_GET['groupId'];
-    $sqlTeams = "SELECT * FROM Teams WHERE groupID = $groupId";
-    $resultTeams = $conn->query($sqlTeams);
-
-    $teams = array();
-
-    if ($resultTeams->num_rows > 0) {
-        while ($row = $resultTeams->fetch_assoc()) {
-            $teams[] = $row;
-        }
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
     }
 
-    echo json_encode($teams);
-}
+    // Use prepared statement to prevent SQL injection
+    $sql = "SELECT team_name, logo_img FROM teams WHERE group_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $groupId); // "i" represents an integer
 
-$conn->close();
+    // Execute the statement
+    $stmt->execute();
+
+    // Get the result
+    $result = $stmt->get_result();
+
+    // Output data as JSON
+    $teamsData = array();
+    while ($row = $result->fetch_assoc()) {
+        $teamsData[] = $row;
+    }
+
+    echo json_encode($teamsData);
+
+    // Close the statement and connection
+    $stmt->close();
+    $conn->close();
+}
 ?>
+

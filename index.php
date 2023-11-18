@@ -1,287 +1,110 @@
-<!-- http://localhost/world-cup/ -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Display Data</title>
-    <!-- <link rel="stylesheet" href="style.css"> -->
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        .topnav {
-            display: flex;
-            justify-content: space-between;
-            overflow: hidden;
-            background-color: #610C9F;
-        }
-
-        .topnav a {
-            float: left;
-            display: block;
-            color: #f2f2f2;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 17px;
-
-        }
-
-        .topnav a.active {
-            /* background-color: #04AA6D; */
-            color: white;
-        }
-
-        .topnav .icon {
-            display: none;
-        }
-
-        @media screen and (max-width: 600px) {
-            .topnav a:not(:first-child) {
-                display: none;
-            }
-
-            .topnav a.icon {
-                float: right;
-                display: block;
-            }
-        }
-
-        @media screen and (max-width: 600px) {
-            .topnav.responsive {
-                position: relative;
-            }
-
-            .topnav.responsive .icon {
-                position: absolute;
-                right: 0;
-                top: 0;
-            }
-
-            .topnav.responsive a {
-                float: none;
-                display: block;
-                text-align: left;
-            }
-        }
-
-
-
-
-
-
-
-        .navbar a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-
-        .card-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(2, 1fr);
-            grid-column-gap: 100px;
-            grid-row-gap: 20px;
-            padding: 20px;
-            height: 100vh;
-
-        }
-
-        .card {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 10px;
-            cursor: pointer;
-            background-image: url('R.jpeg');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
-            position: relative;
-        }
-
-        .card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            background: rgba(0, 0, 0, 0.5);
-            /* Adjust the background color and opacity as needed */
-            border-radius: 5px;
-        }
-
-        .card h3,
-        .card p {
-            margin: 0;
-            z-index: 1;
-        }
-
-        .card h3 {
-            font-size: 1.5em;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .card p {
-            font-size: 1em;
-        }
-
-        /* Additional styling for overlay */
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 100;
-        }
-
-        #popup {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            text-align: center;
-        }
-
-        #popup button {
-            margin-top: 10px;
-            padding: 8px 16px;
-            background-color: #333;
-            color: white;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-
-        #popup button:hover {
-            background-color: #555;
-        }
-
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>World Cup 2030</title>
 </head>
 
-<body>
-    <div class="topnav" id="myTopnav">
-        <a href="#home" class="active" style="font-weight: 900; font-size:20px;
-">World Cup 2030</a>
-        <div>
-            <a href="#">News</a>
-            <a href="#">Teams</a>
-            <a href="#">Players</a>
+<body class=" ">
 
+
+
+    <nav class="bg-violet border-gray-200 dark:bg-gray-900">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="index.php" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <img src="img/icons8-coupe-du-monde-48.png" class="h-8" alt="Flowbite Logo" />
+                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">world Cup</span>
+            </a>
+            <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false" onclick="toggleNavbar()">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
+                </svg>
+            </button>
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    <li>
+                        <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Home</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Teams</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Plyers</a>
+                    </li>
+
+                </ul>
+            </div>
         </div>
+    </nav>
 
-        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-        </a>
-    </div>
-
-    <div class="content">
-        <div class="para">
-            <p>
+    <section style="background-color: #4a094ae3;">
+        <div class=" flex justify-around gap-2 container mx-auto py-6 sm:py-8 lg:px-6 xl:px-8">
+            <p class="text-center my-24 text-white">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Aliquam iste velit natus corporis? Quisquam, reiciendis quos.
-                Nisi, eius repudiandae et, ratione porro similique nesciunt
-                eveniet amet cum doloremque dignissimos quisquam?
+                 Explicabo excepturi cupiditate sequi quasi rerum officiis 
+                 maxime, sint eum, natus quas, deserunt iure? Numquam beatae
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+               
             </p>
-        </div>
 
-        <div class="content-img">
-            <img src="FIFA-Highlights-FWC-2022.webp" alt="">
-        </div>
-    </div>
+            <img class="w-full h-96" src="img/dribbble_morocco_2030_fifa-01_4x.jpg" alt="">
 
-    <div class="card-container">
+        </div>
+    </section>
+
+    <!-- Main Groups Section -->
+    <div class="bg-gray-100 grid grid-cols-2 gap-4 p-7 ">
         <?php
-        // Your existing PHP code to connect to the database and retrieve data...
         $servername = "localhost";
         $username = "root";
         $password = "";
-        $dbname = "woldcup_db";
-        $port = "3306";
+        $dbname = "worldcup";
 
-        $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+        $conn = new mysqli($servername, $username, $password, $dbname);
 
-        // Check the connection
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
 
-        // Display data from the Groups table in cards
-        $sqlGroups = "SELECT * FROM Groups";
-        $resultGroups = $conn->query($sqlGroups);
+        // Retrieve group data
+        $groupQuery = "SELECT * FROM groups";
+        $groupResult = $conn->query($groupQuery);
 
-        if ($resultGroups->num_rows > 0) {
-            while ($row = $resultGroups->fetch_assoc()) {
-                // Output HTML for each group card
-                echo "<div class='card' onclick='showTeamPopup({$row['id']})'>";
-                echo "<h3>{$row['Name']}</h3>";
-                // Check if stadiumImage is set and not empty
-                if (!empty($row['stadiumImage'])) {
-                    echo "<img src='{$row['stadiumImage']}' alt='Stadium Image' style='width: 100%; max-height: 150px; object-fit: cover;'>";
-                }
-                echo "<p>Stadium: {$row['stadiumName']}</p>";
-                echo "</div>";
-            }
-        } else {
-            echo "No data found in Groups table";
+        while ($groupRow = $groupResult->fetch_assoc()) {
+            echo "<div class='flex justify-between bg-v p-4 rounded shadow w-full h-[100%]'>
+                <div class='flex flex-col'>
+                    <h2 class='text-2xl font-bold mb-2 text-gray-800'>" . $groupRow['group_name'] . "</h2>
+                    <p class='text-blue-600'>Stadium: " . $groupRow['stadium_name'] . "</p>
+                </div>
+                
+                <button onclick='showTeams(" . $groupRow['id'] . ")' class='mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-900 focus:outline-none'>View Teams</button>
+            </div>";
         }
 
-        // Close the database connection
         $conn->close();
         ?>
-
     </div>
 
-    <!-- Popup overlay -->
-    <div class="overlay" id="overlay" onclick="closePopup()">
-        <!-- Popup to display team information -->
-        <div id="popup">
-            <h2>Team Information</h2>
-            <div id="teamInfo"></div> <!-- Container for team information -->
-            <button onclick="closePopup()">Close</button>
+
+    <!-- Teams Popup -->
+    <div id="teamsPopup" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 hidden">
+        <div id="popupContent" class="m-auto w-2/3 bg-white p-8 rounded shadow">
+            <h2 id="popupTitle" class="text-2xl font-bold mb-4 text-gray-800"></h2>
+            <ul id="teamsList" class="list-disc pl-6"></ul>
+            <button onclick="hideTeamsPopup()" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none">Close</button>
         </div>
     </div>
 
-    <!-- Add this script tag to the bottom of your HTML, before the closing </body> tag -->
-<script>
-    function showTeamPopup(teamId) {
-        // Fetch team details from the server using AJAX or any other method
-        // For demonstration purposes, I'm using a dummy object
-        var teamDetails = {
-            name: "Team Name",
-            info: "Additional information about the team."
-        };
-
-        // Display team information in the popup
-        var popupContent = "<h2>" + teamDetails.name + "</h2>";
-        popupContent += "<p>" + teamDetails.info + "</p>";
-
-        document.getElementById("teamInfo").innerHTML = popupContent;
-        document.getElementById("overlay").style.display = "block";
-    }
-
-    function closePopup() {
-        document.getElementById("overlay").style.display = "none";
-    }
-</script>
-
-
     <script src="script.js"></script>
+
+
+
 </body>
 
 </html>
