@@ -4,38 +4,30 @@ $username = "root";
 $password = "";
 $dbname = "worldcup";
 
-// Check if group_id is set in the URL
 if (isset($_GET['group_id'])) {
     $groupId = $_GET['group_id'];
 
     $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    // Use prepared statement to prevent SQL injection
+    
     $sql = "SELECT team_name, logo_img FROM teams WHERE group_id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $groupId); // "i" represents an integer
+    $stmt->bind_param("i", $groupId); 
 
-    // Execute the statement
     $stmt->execute();
 
-    // Get the result
     $result = $stmt->get_result();
 
-    // Output data as JSON
     $teamsData = array();
     while ($row = $result->fetch_assoc()) {
-        $teamsData[] = $row;
+        $teamsData[] = array(
+            'team_name' => $row['team_name'],
+            'logo_img' => $row['logo_img']
+        );
     }
 
     echo json_encode($teamsData);
 
-    // Close the statement and connection
     $stmt->close();
     $conn->close();
 }
 ?>
-
